@@ -13,7 +13,7 @@ This uses CSS transition on max-height value. The max-height is dynamically set 
 
 # html structure
 
-Default
+Basic example
 ```html
  <div class="nst-component">
     <button onclick="nst.toggle(event)">toggle</button>
