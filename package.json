@@ -1,0 +1,30 @@
+{
+  "name": "native-slide-toggle",
+  "version": "1.0.0",
+  "description": "VanillaJS slide toggle",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd src && browser-sync start --server --files '*.*' --no-ghost-mode",
+    "clean": "rimraf dist/*",
+    "minifyjs": "uglifyjs src/nst.js -c -o dist/nst.min.js",
+    "minifycss": "cleancss src/nst.css -o dist/nst.min.css",
+    "deploy": "npm run clean && npm run minifyjs && npm run minifycss"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunukn/native-slide-toggle.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kunukn/native-slide-toggle/issues"
+  },
+  "homepage": "https://github.com/kunukn/native-slide-toggle#readme",
+  "devDependencies": {
+    "browser-sync": "^2.13.0",
+    "clean-css": "^3.4.18",
+    "eslint": "^3.1.1",
+    "rimraf": "^2.5.3",
+    "uglifyjs": "^2.4.10"
+  }
+}

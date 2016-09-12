@@ -1,0 +1,66 @@
+html {
+    font: 100% Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0.9%;
+}
+
+.demo {
+    display: block;
+    margin: 0 auto;
+    max-width: 800px;
+    overflow: hidden;
+}
+
+.column-1 {
+    width: 49%;
+    float: left;
+}
+
+.column-2 {
+    width: 49%;
+    float: right;
+}
+
+.component {
+    border: 1px solid;
+    margin-bottom: .5rem;
+}
+
+.component > button {
+    font-weight: bold;
+    background: orange;
+    box-shadow: 0 2px .5rem #789;
+    border: none;
+    font-size: inherit;
+    padding: 1rem;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.component > button:focus {
+    box-shadow: 0 2px .5rem #333;
+}
+
+.component > .content {
+    padding: 1rem;
+}
+
+.component.nst-component > button {
+    /* override library */
+    background: #bada55;
+}
+
+.component.nst-component .nst-content {
+    /* override library */
+    padding: 0;
+}
+
+.component.nst-component .nst-content > div {
+    /* override library */
+    padding: 1rem;
+}

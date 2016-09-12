@@ -1,0 +1,44 @@
+.nst-component .nst-content {
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-transition: max-height ease-out 200ms;
+    transition: max-height ease-out 200ms;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.nst-component .nst-content > div {
+    -webkit-transition: -webkit-transform 200ms;
+    transition: -webkit-transform 200ms;
+    transition: transform 200ms;
+    transition: transform 200ms, -webkit-transform 200ms;
+}
+
+.nst-component.is-expanding .nst-content {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+
+.nst-component.is-expanding .nst-content > div {
+    -webkit-transform: translateY(10px);
+    transform: translateY(10px);
+}
+
+.nst-component.is-expanded .nst-content > div {
+    -webkit-transition: none;
+    transition: none;
+}
+
+.nst-component.is-collapsing .nst-content > div {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+}
+
+.nst-component.is-collapsed .nst-content {
+    display: none;
+}
+
+.nst-fix-safari-bug {
+    -webkit-transition: none !important;
+    transition: none !important;
+}

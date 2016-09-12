@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nst.css">
+    <link rel="stylesheet" href="demo.css">
+</head>
+
+<body>
+
+    <main class="demo">
+
+        <section class="column-1">
+            <div class="component nst-component">
+                <button onclick="nst.toggle(event)">
+        native<br/>slideToggle</button>
+                <div class="content nst-content"></div>
+            </div>
+            <div class="component nst-component">
+                <button onclick="nst.toggle(event)">
+        native<br/>slideToggle</button>
+                <div class="content nst-content"></div>
+            </div>
+            <div class="component nst-component">
+                <button onclick="nst.toggle(event)">
+        native<br/>slideToggle</button>
+                <div class="content nst-content"></div>
+            </div>
+        </section>
+
+        <section class="column-2">
+
+            <div class="component">
+                <button onclick="jQueryToggle(event)">
+        jQuery<br/>slideToggle</button>
+                <div class="content"> </div>
+            </div>
+
+            <div class="component">
+                <button onclick="jQueryToggle(event)">
+        jQuery<br/>slideToggle</button>
+                <div class="content"> </div>
+            </div>
+
+            <div class="component">
+                <button onclick="jQueryToggle(event)">
+        jQuery<br/>slideToggle</button>
+                <div class="content"> </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="nst.js"></script>
+    <script src="demo.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+
+</body>
