@@ -36,6 +36,13 @@ Check the **index.html** for inspiration.
 * Apply the markup structure
 * Apply custom css to override the library css
 
+# development
+* Git clone the project or download it
+* npm install
+* npm run start
+
+For minification 
+* npm run deploy
 
 # features
 * Small library - JS is ~3kb minified and CSS is ~900 bytes minified
