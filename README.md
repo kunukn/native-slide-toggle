@@ -1,5 +1,5 @@
 # native slide toggle
-Vanilla JS version of jQuery.slideToggle
+Vanilla JS mobile friendly version of jQuery.slideToggle
 
 # about
 slide toggle to open or close content using CSS transition and transitionend event.
