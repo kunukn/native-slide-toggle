@@ -1,6 +1,6 @@
 ;'use strict';
 
-window.nst = function(_) {
+window.nst = (function() {
     var log = console.log.bind(console),
      error = console.error.bind(console);
 
@@ -144,4 +144,4 @@ window.nst = function(_) {
     return {
         toggle: toggle
     };
-}();
+})();
