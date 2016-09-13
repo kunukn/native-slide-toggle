@@ -6,7 +6,7 @@ slide toggle to open or close content using CSS transition and transitionend eve
 
 # demo
 
-![demo](https://raw.github.com/kunukn/native-slide-toggle/master/images/demo.png "demo")
+[![demo](https://raw.github.com/kunukn/native-slide-toggle/master/images/demo.png)](http://codepen.io/kunukn/full/yaYvrp/)
 
 * native slide toggle vs jQuery.slideToggle http://codepen.io/kunukn/full/yaYvrp/
 
