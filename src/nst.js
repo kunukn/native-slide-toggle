@@ -1,8 +1,16 @@
-;'use strict';
+/*!
+ * native slide toggle 1.0.0
+ * https://github.com/kunukn/native-slide-toggle/
+ *
+ * Copyright Kunuk Nykjaer
+ * Released under the MIT license
+ */
+
+'use strict';
 
 window.nst = (function() {
     var log = console.log.bind(console),
-     error = console.error.bind(console);
+        error = console.error.bind(console);
 
     var fixSafariBugCss = 'nst-fix-safari-bug',
         componentCss = 'nst-component',
@@ -66,7 +74,11 @@ window.nst = (function() {
 
         function expand(component, content) {
 
-            content.offsetHeight; // reflow to apply transition animation, the content had display:none which made content transform micro-animation not working
+            /* 
+                reflow to apply transition animation
+                the content had display:none which made content transform micro-animation not working
+            */
+            content.offsetHeight;
 
             component.classList.add(expandingCss);
 
