@@ -1,5 +1,5 @@
 /*!
- * native slide toggle 1.0.0
+ * native slide toggle 1.1.0
  * https://github.com/kunukn/native-slide-toggle/
  *
  * Copyright Kunuk Nykjaer
@@ -80,7 +80,7 @@ window.nst = (function () {
 
         function expand(component, content) {
 
-            /* 
+            /*
              reflow to apply transition animation
              the content had display:none which made content transform micro-animation not working
              */
