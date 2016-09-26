@@ -11,7 +11,7 @@ slide toggle to open or close content using CSS transition and transitionend eve
 * native slide toggle vs jQuery.slideToggle http://codepen.io/kunukn/full/yaYvrp/
 
 # how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted. The onclick declarative binding in the markup is used to make it flexible for removing or adding items without having to use addEvent or removeEvent listener bindings.
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted.
 
 
 # html structure
@@ -19,7 +19,7 @@ This uses CSS transition on max-height value. The max-height is dynamically set 
 Basic example
 ```html
  <div class="nst-component">
-    <button onclick="nst.toggle(event)">toggle</button>
+    <button class="nst-toggle">toggle</button>
     <div class="nst-content">
       <div>
         Your content here
@@ -28,7 +28,7 @@ Basic example
   </div>
 ```
 
-nst-component must be a parent element to the nst-content element and the element which triggers the nst.toggle() function.
+nst-component must be a parent element to the nst-content element and the nst-toggle element.
 The extra div inside the nst-content is for padding and to make the open/close animation look similar to jQuery.slideToggle.
 
 # usage
