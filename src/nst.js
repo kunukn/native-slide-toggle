@@ -8,19 +8,25 @@
 
 'use strict';
 
-window.nst = (function() {
+window.nst = (function () {
     var log = console.log.bind(console),
         error = console.error.bind(console);
 
     var fixSafariBugCss = 'nst-fix-safari-bug',
         componentCss = 'nst-component',
         contentCss = 'nst-content',
+        toggleSelector = '.nst-toggle',
         collapsingCss = 'is-collapsing',
         collapsedCss = 'is-collapsed',
         expandingCss = 'is-expanding',
         expandedCss = 'is-expanded',
         activeCss = 'is-active',
         eventNameTransitionEnd = 'transitionend';
+
+
+    function $$(expr, context) {
+        return [].slice.call((context || document).querySelectorAll(expr), 0);
+    }
 
     function getSlideToggleComponent(element) {
         var root = element;
@@ -75,9 +81,9 @@ window.nst = (function() {
         function expand(component, content) {
 
             /* 
-                reflow to apply transition animation
-                the content had display:none which made content transform micro-animation not working
-            */
+             reflow to apply transition animation
+             the content had display:none which made content transform micro-animation not working
+             */
             content.offsetHeight;
 
             component.classList.add(expandingCss);
@@ -92,7 +98,7 @@ window.nst = (function() {
                         content.classList.add(fixSafariBugCss);
 
                         content.style.maxHeight = '';
-                        setTimeout(function() {
+                        setTimeout(function () {
                             content.classList.remove(fixSafariBugCss);
                         }, 0);
                     }
@@ -153,7 +159,52 @@ window.nst = (function() {
         }
     }
 
+    function destroy(container) {
+        if (container) {
+            var toggles = $$(toggleSelector, container);
+            if (toggles && toggles.length) {
+                toggles.forEach(function (toggleElement) {
+                    toggleElement.removeEventListener('click', toggle);
+                });
+            }
+        }
+        return this;
+    }
+
+    function destroyAll() {
+        var allToggles = $$(toggleSelector);
+        if (allToggles && allToggles.length) {
+            allToggles.forEach(function (toggleElement) {
+                toggleElement.removeEventListener('click', toggle);
+            });
+        }
+        return this;
+    }
+
+    function init(container) {
+        if (container) {
+            var toggles = $$(toggleSelector, container);
+            toggles.forEach(function (toggleElement) {
+                toggleElement.addEventListener('click', toggle);
+            });
+        }
+        return this;
+    }
+
+    function initAll() {
+        var allToggles = $$(toggleSelector);
+        allToggles.forEach(function (toggleElement) {
+            toggleElement.addEventListener('click', toggle);
+        });
+        return this;
+    }
+
+    initAll();
+
     return {
-        toggle: toggle
+        init: init,
+        initAll: initAll,
+        destroy: destroy,
+        destroyAll: destroyAll
     };
 })();
