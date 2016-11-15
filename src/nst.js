@@ -1,5 +1,5 @@
 /*!
- * native slide toggle 1.1.0
+ * native slide toggle 1.1.1
  * https://github.com/kunukn/native-slide-toggle/
  *
  * Copyright Kunuk Nykjaer
@@ -8,7 +8,7 @@
 
 'use strict';
 
-window.nst = (function () {
+window.nst = (function() {
     var log = console.log.bind(console),
         error = console.error.bind(console);
 
@@ -16,16 +16,25 @@ window.nst = (function () {
         componentCss = 'nst-component',
         contentCss = 'nst-content',
         toggleSelector = '.nst-toggle',
-        collapsingCss = 'is-collapsing',
-        collapsedCss = 'is-collapsed',
-        expandingCss = 'is-expanding',
-        expandedCss = 'is-expanded',
-        activeCss = 'is-active',
+        collapsingCss = 'nst-is-collapsing',
+        collapsedCss = 'nst-is-collapsed',
+        expandingCss = 'nst-is-expanding',
+        expandedCss = 'nst-is-expanded',
+        activeCss = 'nst-is-active',
         eventNameTransitionEnd = 'transitionend';
-
 
     function $$(expr, context) {
         return [].slice.call((context || document).querySelectorAll(expr), 0);
+    }
+
+    function rAF(callback) {
+        window.requestAnimationFrame(callback);
+    }
+
+    function nextFrame(callback) {
+        window.requestAnimationFrame(function() {
+            window.requestAnimationFrame(callback);
+        });
     }
 
     function getSlideToggleComponent(element) {
@@ -70,58 +79,56 @@ window.nst = (function () {
             content.style.maxHeight = height + 'px';
 
             content.addEventListener(eventNameTransitionEnd, transitionEnd, false);
-
-            content.offsetHeight; // reflow to apply transition animation
-
-            content.classList.remove(fixSafariBugCss);
-
-            content.style.maxHeight = '0px';
+            
+            var applyOnNextFrame = function() {
+                content.classList.remove(fixSafariBugCss);
+                content.style.maxHeight = '0px';
+            }
+            nextFrame(applyOnNextFrame);
         }
 
-        function expand(component, content) {
+        function expand(component, content) {            
+            nextFrame(function() {
 
-            /*
-             reflow to apply transition animation
-             the content had display:none which made content transform micro-animation not working
-             */
-            content.offsetHeight;
+                component.classList.add(expandingCss);
 
-            component.classList.add(expandingCss);
+                function transitionEnd(event) {
+                    if (event.propertyName === 'max-height') {
 
-            function transitionEnd(event) {
-                if (event.propertyName === 'max-height') {
+                        if (component.classList.contains(expandingCss)) {
+                            component.classList.remove(expandingCss);
+                            component.classList.add(expandedCss);
 
-                    if (component.classList.contains(expandingCss)) {
-                        component.classList.remove(expandingCss);
-                        component.classList.add(expandedCss);
+                            content.classList.add(fixSafariBugCss);
 
-                        content.classList.add(fixSafariBugCss);
+                            content.style.maxHeight = '';
+                            setTimeout(function() {
+                                content.classList.remove(fixSafariBugCss);
+                            }, 0);
+                        }
 
-                        content.style.maxHeight = '';
-                        setTimeout(function () {
-                            content.classList.remove(fixSafariBugCss);
-                        }, 0);
+                        content.removeEventListener(eventNameTransitionEnd, transitionEnd, false);
                     }
-
-                    content.removeEventListener(eventNameTransitionEnd, transitionEnd, false);
                 }
-            }
 
-            content.classList.add(fixSafariBugCss);
+                content.classList.add(fixSafariBugCss);
 
-            content.style.maxHeight = 'none';
+                content.style.maxHeight = 'none';
 
-            var BCR = content.getBoundingClientRect();
+                var BCR = content.getBoundingClientRect();
 
-            content.style.maxHeight = '0px';
+                content.style.maxHeight = '0px';
 
-            content.addEventListener(eventNameTransitionEnd, transitionEnd, false);
+                content.addEventListener(eventNameTransitionEnd, transitionEnd, false);
+                
+                rAF(function() {
+                    content.classList.remove(fixSafariBugCss);
+                    content.style.maxHeight = BCR.height + 'px';
+                });
 
-            content.offsetHeight; // reflow to apply transition animation
 
-            content.classList.remove(fixSafariBugCss);
+            });
 
-            content.style.maxHeight = BCR.height + 'px';
         }
 
         var toggle = event.target,
@@ -163,7 +170,7 @@ window.nst = (function () {
         if (container) {
             var toggles = $$(toggleSelector, container);
             if (toggles && toggles.length) {
-                toggles.forEach(function (toggleElement) {
+                toggles.forEach(function(toggleElement) {
                     toggleElement.removeEventListener('click', toggle);
                 });
             }
@@ -174,7 +181,7 @@ window.nst = (function () {
     function destroyAll() {
         var allToggles = $$(toggleSelector);
         if (allToggles && allToggles.length) {
-            allToggles.forEach(function (toggleElement) {
+            allToggles.forEach(function(toggleElement) {
                 toggleElement.removeEventListener('click', toggle);
             });
         }
@@ -184,7 +191,7 @@ window.nst = (function () {
     function init(container) {
         if (container) {
             var toggles = $$(toggleSelector, container);
-            toggles.forEach(function (toggleElement) {
+            toggles.forEach(function(toggleElement) {
                 toggleElement.addEventListener('click', toggle);
             });
         }
@@ -193,7 +200,7 @@ window.nst = (function () {
 
     function initAll() {
         var allToggles = $$(toggleSelector);
-        allToggles.forEach(function (toggleElement) {
+        allToggles.forEach(function(toggleElement) {
             toggleElement.addEventListener('click', toggle);
         });
         return this;
