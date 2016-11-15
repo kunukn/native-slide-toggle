@@ -52,6 +52,23 @@ nst-component must be a parent element to the nst-content element and the nst-to
 The extra div inside the nst-content is for padding and to make the open/close animation look similar to jQuery.slideToggle.
 
 
+# configuration
+
+If you want to start with collapsed state add `nst-is-collapsed` class to the component. e.g.
+
+```html
+ <div class="nst-component nst-is-collapsed">
+    <button class="nst-toggle">toggle</button>
+    <div class="nst-content">
+      <div>
+        Your content here
+      </div>
+    </div>
+  </div>
+```
+
+
+
 
 # how does it work?
 This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted.
