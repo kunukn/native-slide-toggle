@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.1.1
+
+* Ability to start in collapsed mode
+
 ### 1.1.0
 
 * Use event listeners instead of inline html click event
