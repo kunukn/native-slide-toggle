@@ -17,8 +17,21 @@ slide toggle to open or close content using CSS transition and transitionend eve
 | 50+ ✅ | 40+ ✅ | 9+ ✅ | 40+ ✅ | 12+ ✅ | 11+ ✅ |
 
 
-# how does it work?
-This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted.
+# features
+* Small library - JS is ~3kb minified and CSS is ~900 bytes minified
+* CSS max-height transition on dynamically calculated height value
+* Simple html structure with minimum CSS class usage 
+* Max-height is dynamically set and reset after the animation
+* Tabbing is supported
+* Vanilla JS, no other dependency
+
+# usage
+
+Check the **index.html** for inspiration.
+
+* Add reference to `nst.min.js` and `nst.min.css` in the html page
+* Apply the markup structure
+* Apply custom css to override the library css
 
 
 # html structure
@@ -38,13 +51,10 @@ Basic example
 nst-component must be a parent element to the nst-content element and the nst-toggle element.
 The extra div inside the nst-content is for padding and to make the open/close animation look similar to jQuery.slideToggle.
 
-# usage
 
-Check the **index.html** for inspiration.
 
-* Add reference to `nst.min.js` and `nst.min.css` in the html page
-* Apply the markup structure
-* Apply custom css to override the library css
+# how does it work?
+This uses CSS transition on max-height value. The max-height is dynamically set and removed with JS during expanding and collapsing. The height value is calculated dynamically based on the content. You can rotate the device or resize the browser window where the height is dynamically adjusted.
 
 # development
 * Git clone the project or download it
@@ -53,14 +63,6 @@ Check the **index.html** for inspiration.
 
 For minification 
 * npm run deploy
-
-# features
-* Small library - JS is ~3kb minified and CSS is ~900 bytes minified
-* CSS max-height transition on dynamically calculated height value
-* Simple html structure with minimum CSS class usage 
-* Max-height is dynamically set and reset after the animation
-* Tabbing is supported
-* Vanilla JS, no other dependency
 
 # supported browsers
 
