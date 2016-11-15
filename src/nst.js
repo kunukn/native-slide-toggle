@@ -20,7 +20,6 @@ window.nst = (function() {
         collapsedCss = 'nst-is-collapsed',
         expandingCss = 'nst-is-expanding',
         expandedCss = 'nst-is-expanded',
-        activeCss = 'nst-is-active',
         eventNameTransitionEnd = 'transitionend';
 
     function $$(expr, context) {
@@ -79,15 +78,14 @@ window.nst = (function() {
             content.style.maxHeight = height + 'px';
 
             content.addEventListener(eventNameTransitionEnd, transitionEnd, false);
-            
-            var applyOnNextFrame = function() {
+
+            nextFrame(function() {
                 content.classList.remove(fixSafariBugCss);
                 content.style.maxHeight = '0px';
-            }
-            nextFrame(applyOnNextFrame);
+            });
         }
 
-        function expand(component, content) {            
+        function expand(component, content) {
             nextFrame(function() {
 
                 component.classList.add(expandingCss);
@@ -102,9 +100,12 @@ window.nst = (function() {
                             content.classList.add(fixSafariBugCss);
 
                             content.style.maxHeight = '';
-                            setTimeout(function() {
+                            //setTimeout(function() {
+                            //content.classList.remove(fixSafariBugCss);
+                            //}, 0);
+                            nextFrame(function() {
                                 content.classList.remove(fixSafariBugCss);
-                            }, 0);
+                            });
                         }
 
                         content.removeEventListener(eventNameTransitionEnd, transitionEnd, false);
@@ -120,7 +121,7 @@ window.nst = (function() {
                 content.style.maxHeight = '0px';
 
                 content.addEventListener(eventNameTransitionEnd, transitionEnd, false);
-                
+
                 rAF(function() {
                     content.classList.remove(fixSafariBugCss);
                     content.style.maxHeight = BCR.height + 'px';
@@ -152,17 +153,16 @@ window.nst = (function() {
             return;
         }
 
-        component.classList.remove(collapsedCss);
+
         component.classList.remove(expandingCss);
         component.classList.remove(collapsingCss);
-        component.classList.remove(expandedCss);
 
-        component.classList.toggle(activeCss);
-
-        if (component.classList.contains(activeCss)) {
-            collapse(component, content);
-        } else {
+        if (component.classList.contains(collapsedCss)) {
+            component.classList.remove(collapsedCss);
             expand(component, content);
+        } else {
+            component.classList.remove(expandedCss);
+            collapse(component, content);
         }
     }
 
@@ -199,10 +199,18 @@ window.nst = (function() {
     }
 
     function initAll() {
-        var allToggles = $$(toggleSelector);
+        var component, allToggles = $$(toggleSelector);
         allToggles.forEach(function(toggleElement) {
+
+            // if init with collapsed state, then set required maxHeight
+            component = getSlideToggleComponent(toggleElement);
+            if (component && component.classList.contains(collapsedCss)) {
+                component.querySelector('.' + contentCss).style.maxHeight = '0px';
+            }
+
             toggleElement.addEventListener('click', toggle);
         });
+
         return this;
     }
 
