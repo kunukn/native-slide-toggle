@@ -1,5 +1,5 @@
 /*!
- * native slide toggle 1.1.1
+ * native slide toggle 1.1.2
  * https://github.com/kunukn/native-slide-toggle/
  *
  * Copyright Kunuk Nykjaer
@@ -14,6 +14,7 @@ window.nst = (function() {
 
     var fixSafariBugCss = 'nst-fix-safari-bug',
         componentCss = 'nst-component',
+        manualInitCss = 'nst-manual-init',
         contentCss = 'nst-content',
         toggleSelector = '.nst-toggle',
         collapsingCss = 'nst-is-collapsing',
@@ -198,23 +199,41 @@ window.nst = (function() {
         return this;
     }
 
-    function initAll() {
-        var component, allToggles = $$(toggleSelector);
+    function initAll(config) {
+
+        var isAutoInit = config && config.autoInit,
+            component, allToggles = $$(toggleSelector);
+
+        if (config && config.log) {
+            log(config.log);
+        }
+
         allToggles.forEach(function(toggleElement) {
 
-            // if init with collapsed state, then set required maxHeight
             component = getSlideToggleComponent(toggleElement);
-            if (component && component.classList.contains(collapsedCss)) {
-                component.querySelector('.' + contentCss).style.maxHeight = '0px';
+
+            if (!component) {
+                error('nst component not found: ' + component);
+                return this;
             }
 
-            toggleElement.addEventListener('click', toggle);
+            var isManualInit = component.classList.contains(manualInitCss),
+                skip = isAutoInit && isManualInit;
+
+            if (!skip) {
+                if (component.classList.contains(collapsedCss)) {
+                    // if init with collapsed state, then set required maxHeight
+                    component.querySelector('.' + contentCss).style.maxHeight = '0px';
+                }
+
+                toggleElement.addEventListener('click', toggle);
+            }
         });
 
         return this;
     }
 
-    initAll();
+    initAll({ autoInit: true });
 
     return {
         init: init,

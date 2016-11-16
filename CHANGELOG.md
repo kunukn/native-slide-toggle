@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.1.2
+
+* Ability to skip auto init
+
 ### 1.1.1
 
 * Ability to start in collapsed mode
