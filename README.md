@@ -25,6 +25,10 @@ slide toggle to open or close content using CSS transition and transitionend eve
 * Tabbing is supported
 * Vanilla JS, no other dependency
 
+# npm 
+
+https://www.npmjs.com/package/native-slide-toggle
+
 # usage
 
 Check the **index.html** for inspiration.
@@ -32,7 +36,6 @@ Check the **index.html** for inspiration.
 * Add reference to `nst.min.js` and `nst.min.css` in the html page
 * Apply the markup structure
 * Apply custom css to override the library css
-
 
 # html structure
 
