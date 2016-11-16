@@ -100,10 +100,7 @@ window.nst = (function() {
 
                             content.classList.add(fixSafariBugCss);
 
-                            content.style.maxHeight = '';
-                            //setTimeout(function() {
-                            //content.classList.remove(fixSafariBugCss);
-                            //}, 0);
+                            content.style.maxHeight = '';                            
                             nextFrame(function() {
                                 content.classList.remove(fixSafariBugCss);
                             });
@@ -154,7 +151,6 @@ window.nst = (function() {
             return;
         }
 
-
         component.classList.remove(expandingCss);
         component.classList.remove(collapsingCss);
 
@@ -167,9 +163,9 @@ window.nst = (function() {
         }
     }
 
-    function destroy(container) {
-        if (container) {
-            var toggles = $$(toggleSelector, container);
+    function destroy(component) {
+        if (component) {
+            var toggles = $$(toggleSelector, component);
             if (toggles && toggles.length) {
                 toggles.forEach(function(toggleElement) {
                     toggleElement.removeEventListener('click', toggle);
@@ -189,9 +185,14 @@ window.nst = (function() {
         return this;
     }
 
-    function init(container) {
-        if (container) {
-            var toggles = $$(toggleSelector, container);
+    function init(component) {
+        if (component) {
+            if (component.classList.contains(collapsedCss)) {
+                // if init with collapsed state, then set required maxHeight
+                component.querySelector('.' + contentCss).style.maxHeight = '0px';
+            }
+
+            var toggles = $$(toggleSelector, component);
             toggles.forEach(function(toggleElement) {
                 toggleElement.addEventListener('click', toggle);
             });
