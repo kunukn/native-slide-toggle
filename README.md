@@ -67,6 +67,24 @@ If you want to start with collapsed state add `nst-is-collapsed` class to the co
   </div>
 ```
 
+If you want to manually init the component then add the `nst-manual-init` class to the component. e.g.
+
+```html
+ <div class="nst-component nst-manual-init" id="i-want-to-manually-init-this">
+    <button class="nst-toggle">toggle</button>
+    <div class="nst-content">
+      <div>
+        Your content here
+      </div>
+    </div>
+  </div>
+```
+
+```javascript
+var myComponentElement = document.getElementById('i-want-to-manually-init-this');
+nst.init(myComponentElement);
+```
+
 
 
 
