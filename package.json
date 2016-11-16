@@ -1,8 +1,8 @@
 {
     "name": "native-slide-toggle",
-    "version": "1.0.0",
+    "version": "1.1.3",
     "description": "VanillaJS slide toggle",
-    "main": "index.js",
+    "main": "src/nst.js",
     "scripts": {
         "start": "cd src && browser-sync start --server --files \"*.*\" --no-ghost-mode",
         "clean": "rimraf dist/*",
