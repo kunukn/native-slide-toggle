@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.1.3
+
+* Add commonjs support
+
 ### 1.1.2
 
 * Ability to skip auto init

@@ -1,14 +1,26 @@
 /*!
- * native slide toggle 1.1.2
+ * native slide toggle 1.1.3
  * https://github.com/kunukn/native-slide-toggle/
  *
  * Copyright Kunuk Nykjaer
  * Released under the MIT license
  */
 
-'use strict';
+/* global define, exports: true, module*/
+(function(root, factory) {
+    'use strict';
 
-window.nst = (function() {
+    if (typeof define === 'function' && define.amd) {
+        define('nst', factory);
+    } else if (typeof exports === 'object') {
+        exports = module.exports = factory();
+    } else {
+        root.nst = factory();
+    }
+})(this, function() {
+
+    'use strict';
+
     var log = console.log.bind(console),
         error = console.error.bind(console);
 
@@ -100,7 +112,7 @@ window.nst = (function() {
 
                             content.classList.add(fixSafariBugCss);
 
-                            content.style.maxHeight = '';                            
+                            content.style.maxHeight = '';
                             nextFrame(function() {
                                 content.classList.remove(fixSafariBugCss);
                             });
@@ -242,4 +254,5 @@ window.nst = (function() {
         destroy: destroy,
         destroyAll: destroyAll
     };
-})();
+
+});
